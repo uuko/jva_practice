@@ -2,15 +2,61 @@ package com.example.jva_practice;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.jva_practice.data.Status;
+import com.example.jva_practice.data.Users;
+import com.example.jva_practice.util.RetrofitManager;
+
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class MainRepository {
 
-    private MutableLiveData<String> textStr=new MutableLiveData<>("hello");
-//    MutableLiveData<String>
-    public void setTextStr(String name){
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private MutableLiveData<String> textStr = new MutableLiveData<>("hello");
+    //    MutableLiveData<String>
+    private RetrofitManager manager = RetrofitManager.getInstance();
+
+    public void setTextStr(String name) {
         textStr.postValue(name);
     }
 
-    public MutableLiveData<String> getTextStr(){
+    public MutableLiveData<String> getTextStr() {
         return textStr;
+    }
+
+    private final MutableLiveData<Status<List<Users>>>
+            userLiveData = new MutableLiveData<Status<List<Users>>>
+            ();
+
+    public MutableLiveData<Status<List<Users>>> getUserLiveData(){
+        return userLiveData;
+    }
+
+    public void getUsers() {
+        compositeDisposable
+                .add(manager.getAPI()
+                        .getUsers()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<List<Users>>() {
+                            @Override
+                            public void onNext(List<Users> users) {
+                                userLiveData.postValue(new Status<List<Users>>().success(users));
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                userLiveData.postValue(new Status<List<Users>>().error(e.getMessage()));
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        }));
     }
 }
