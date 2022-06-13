@@ -1,5 +1,7 @@
 package com.example.jva_practice;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.jva_practice.data.Status;
@@ -36,7 +38,7 @@ public class MainRepository {
         return userLiveData;
     }
 
-    public void getUsers() {
+    public MutableLiveData<Status<List<Users>>> getUsers() {
         compositeDisposable
                 .add(manager.getAPI()
                         .getUsers()
@@ -45,6 +47,8 @@ public class MainRepository {
                         .subscribeWith(new DisposableObserver<List<Users>>() {
                             @Override
                             public void onNext(List<Users> users) {
+                                Log.e("setDataList", "onNext userLiveData: " );
+
                                 userLiveData.postValue(new Status<List<Users>>().success(users));
                             }
 
@@ -58,5 +62,10 @@ public class MainRepository {
 
                             }
                         }));
+        return userLiveData;
+    }
+
+    public void disposeComposite() {
+        compositeDisposable.dispose();
     }
 }

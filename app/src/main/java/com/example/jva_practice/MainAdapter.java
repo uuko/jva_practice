@@ -1,5 +1,6 @@
 package com.example.jva_practice;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,16 @@ public class MainAdapter extends
     private MainViewModel viewModel;
     private List<Users> dataList = new ArrayList<>();
 
-    public MainAdapter(List<Users> dataList, MainViewModel viewModel) {
-        this.dataList=dataList;
+    public MainAdapter( MainViewModel viewModel) {
+
         this.viewModel = viewModel;
     }
 
+    public void setDataList(List<Users> dataList){
+        Log.e("setDataList", "setDataList: "+dataList.size() );
+        this.dataList=dataList;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public BookmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

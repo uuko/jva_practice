@@ -46,11 +46,11 @@ public class BindingUtil {
             }
         }
 
-        MainAdapter adapter = new MainAdapter(items, viewModel);
+        MainAdapter adapter = new MainAdapter( viewModel);
         view.setAdapter(
             adapter
         );
-        adapter.notifyDataSetChanged();
+        adapter.setDataList(items);
     }
 //    fun setBookmarks(view: RecyclerView, datas: List<Users>, vm: HomeViewModel) {
 ////    val llm = LinearLayoutManager(this)
