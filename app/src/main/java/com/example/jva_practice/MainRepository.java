@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
+import com.example.jva_practice.db.MainDbMgr;
+import com.example.jva_practice.util.DBUtils;
 import com.example.jva_practice.util.RetrofitManager;
 
 import java.util.List;
@@ -34,8 +36,14 @@ public class MainRepository {
             userLiveData = new MutableLiveData<Status<List<Users>>>
             ();
 
-    public MutableLiveData<Status<List<Users>>> getUserLiveData(){
+    public MutableLiveData<Status<List<Users>>> getUserLiveData() {
         return userLiveData;
+    }
+
+    public void saveUsers(List<Users> usersList) {
+        Log.e("MainRepository", "saveUsers: "+usersList.size() );
+        MainDbMgr.getInstance()
+                .insertSharesItemList(DBUtils.toMainTableList(usersList));
     }
 
     public MutableLiveData<Status<List<Users>>> getUsers() {
@@ -47,7 +55,7 @@ public class MainRepository {
                         .subscribeWith(new DisposableObserver<List<Users>>() {
                             @Override
                             public void onNext(List<Users> users) {
-                                Log.e("setDataList", "onNext userLiveData: " );
+                                Log.e("setDataList", "onNext userLiveData: ");
 
                                 userLiveData.postValue(new Status<List<Users>>().success(users));
                             }

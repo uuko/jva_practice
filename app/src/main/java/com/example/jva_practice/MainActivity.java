@@ -1,5 +1,6 @@
 package com.example.jva_practice;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,6 +14,8 @@ import com.example.jva_practice.data.Users;
 import com.example.jva_practice.databinding.ActivityMainBinding;
 
 import java.util.List;
+
+import io.reactivex.functions.Action;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel, MainViewModelFactory> {
 
@@ -35,7 +38,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewBinding.setViewModel(mViewModel);
-
-
     }
+
+//    private void handleAction(@NonNull final Action action) {
+//        switch (action.getValue()){
+//            case Action.SHOW_WELCOME:
+//                //show Activity.
+//                break;
+//            case Action.SHOW_INVALID_PASSWARD_OR_LOGIN:
+//                //show Toast
+//                break;
+//        }
+//    }
 }

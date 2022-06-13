@@ -52,17 +52,32 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:background="@color/purple_200"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:viewModel="@{viewModel}"
+            android:background="@color/purple_200"
             app:bookmarks="@{viewModel.statusMutableLiveData}"
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:viewModel="@{viewModel}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.44" />
+
+        <Button
+            android:onClick="@{()-> viewModel.saveUsers(viewModel.statusMutableLiveData)}"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

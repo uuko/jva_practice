@@ -13,6 +13,7 @@ import com.example.jva_practice.data.Users;
 import com.example.jva_practice.util.RetrofitManager;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -51,7 +52,6 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    private RetrofitManager manager = RetrofitManager.getInstance();
 
 
     public void getUsers(String name) {
@@ -59,6 +59,14 @@ public class MainViewModel extends ViewModel {
         aaa.setValue(name);
 
 
+    }
+
+
+    public void saveUsers(LiveData<Status<List<Users>>> data) {
+        if (data.getValue()!=null){
+            repository.saveUsers(Objects.requireNonNull(data.getValue()).data);
+
+        }
     }
 
     @Override
