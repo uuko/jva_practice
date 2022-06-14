@@ -6,7 +6,7 @@ public class Status<T> {
     public String msg;
 
     public Status() {
-
+        this.status = StatusType.INIT;
     }
 
     public Status(StatusType status, T data, String msg) {

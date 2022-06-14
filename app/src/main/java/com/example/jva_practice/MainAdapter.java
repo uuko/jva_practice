@@ -47,6 +47,7 @@ public class MainAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkViewHolder holder, int position) {
+//        Log.e("setDataList", "onBindViewHolder: "+dataList.get(position).getEmail() );
 
         holder.binding.setUser(dataList.get(position));
         holder.binding.setViewModel(viewModel);

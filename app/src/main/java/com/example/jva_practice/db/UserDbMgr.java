@@ -14,15 +14,15 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainDbMgr {
-    private static MainDbMgr instance;
+public class UserDbMgr {
+    private static UserDbMgr instance;
     private final String TAG = "[AlertDBMgr]";
     CompositeDisposable mDisposable = new CompositeDisposable();
     private MainDBDataBase database = App.getMainDatabase();
 
-    public static MainDbMgr getInstance() {
+    public static UserDbMgr getInstance() {
         if (instance == null) {
-            instance = new MainDbMgr();
+            instance = new UserDbMgr();
         }
         return instance;
     }
@@ -32,29 +32,29 @@ public class MainDbMgr {
         return mDisposable;
     }
 
-    public void updateSharesItem(MainTable entity) {
+    public void updateSharesItem(UserTable entity) {
 
-        mDisposable.add(database.mainDbDao().updateUsers(entity)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action() {
-                    @Override
-                    public void run() throws Exception {
-
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-
-                    }
-                }));
+//        mDisposable.add(database.userDbDao().updateUsers(entity)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//
+//                    }
+//                }));
     }
 
 
-    public void insertSharesItemList(List<MainTable> entity) {
+    public void insertSharesItemList(List<UserTable> entity) {
 
         Log.e("MainRepository", "insertSharesItem: ");
-        mDisposable.add(database.mainDbDao().insertAllPrivateData(entity)
+        mDisposable.add(database.userDbDao().insertAllPrivateData(entity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action() {
@@ -74,17 +74,17 @@ public class MainDbMgr {
 
     public void loadAllSharedDataByQbeeID(int QbeeID) {
 
-        database.mainDbDao().loadAllSharedDataByQbeeID(QbeeID)
+        database.userDbDao().loadAllSharedDataByQbeeID(QbeeID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<MainTable>>() {
+                .subscribe(new SingleObserver<List<UserTable>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         mDisposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(List<MainTable> sharedEntityList) {
+                    public void onSuccess(List<UserTable> sharedEntityList) {
                         Log.e("MainDbMgr loadAll", "onSuccess: ");
 
                     }
@@ -99,9 +99,9 @@ public class MainDbMgr {
 
     }
 
-    public void deleteSharedData(MainTable entity) {
+    public void deleteSharedData(UserTable entity) {
 
-        mDisposable.add(database.mainDbDao().deleteUsers(entity)
+        mDisposable.add(database.userDbDao().deleteUsers(entity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action() {

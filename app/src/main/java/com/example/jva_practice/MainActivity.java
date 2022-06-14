@@ -38,6 +38,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewBinding.setViewModel(mViewModel);
+        mViewModel.mLoading.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.e("onChanged", "onChanged: "+aBoolean );
+            }
+        });
     }
 
 //    private void handleAction(@NonNull final Action action) {

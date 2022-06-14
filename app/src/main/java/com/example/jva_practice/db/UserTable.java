@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity
-public class MainTable implements Serializable {
+public class UserTable implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
@@ -15,7 +15,7 @@ public class MainTable implements Serializable {
     private String phone;
     private String website;
 
-    public MainTable(String name, String username, String email, String phone, String website) {
+    public UserTable(String name, String username, String email, String phone, String website) {
         this.name = name;
         this.username = username;
         this.email = email;

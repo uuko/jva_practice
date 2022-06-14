@@ -4,6 +4,14 @@ import java.io.Serializable;
 
 
 public class Users implements Serializable {
+    public Users(String name, String username, String email, String phone, String website) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.website = website;
+    }
+
     /**
      * id : 1
      * name : Leanne Graham
@@ -19,10 +27,13 @@ public class Users implements Serializable {
     private String name;
     private String username;
     private String email;
-    private AddressBean address;
     private String phone;
     private String website;
+
+
+    private AddressBean address;
     private CompanyBean company;
+
 
     public int getId() {
         return id;

@@ -10,15 +10,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
-import com.example.jva_practice.util.RetrofitManager;
 
 import java.util.List;
 import java.util.Objects;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainViewModel extends ViewModel {
     private MainRepository repository;
@@ -27,51 +21,73 @@ public class MainViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public MutableLiveData<String> imgUrl = new MutableLiveData<>("https://i.imgur.com/XeDINZZ.jpeg");
+    public MutableLiveData<String> getUsersChangeRepo = new MutableLiveData<String>();
 
-    public MutableLiveData<String> reallyName = new MutableLiveData<>();
-    public MutableLiveData<String> aaa = new MutableLiveData<String>();
 
     public LiveData<Status<List<Users>>> statusMutableLiveData
             = Transformations.switchMap(
-            aaa, new Function<String, LiveData<Status<List<Users>>>>() {
+            getUsersChangeRepo, new Function<String, LiveData<Status<List<Users>>>>() {
                 @Override
                 public LiveData<Status<List<Users>>> apply(String input) {
                     Log.e("setDataList", "getUsers: 1111111");
-                    return repository.getUsers();
+                    return repository.getAllUsers();
                 }
             }
     );
-    public MutableLiveData<List<Users>> ttt
-            = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> _mLoading
+            = new MutableLiveData<>(false);
+    public MutableLiveData<Boolean> mLoading
+            = _mLoading;
 
-    public void sayHello(String name) {
-//        _name.postValue(name);
-        repository.setTextStr(name);
-        reallyName.setValue(repository.getTextStr().getValue());
+    public void getAllUsers() {
+        getUsersChangeRepo.setValue("");
+
+        _mLoading.setValue(repository.getLoading().getValue());
     }
 
-
-
-
-    public void getUsers(String name) {
-        Log.e("setDataList", "getUsers: 0000000");
-        aaa.setValue(name);
-
-
-    }
-
-
-    public void saveUsers(LiveData<Status<List<Users>>> data) {
-        if (data.getValue()!=null){
-            repository.saveUsers(Objects.requireNonNull(data.getValue()).data);
-
-        }
-    }
 
     @Override
     protected void onCleared() {
         repository.disposeComposite();
         super.onCleared();
     }
+
+
+    //------------------------
+
+//    public MutableLiveData<String> imgUrl = new MutableLiveData<>("https://i.imgur.com/XeDINZZ.jpeg");
+//
+//    public MutableLiveData<String> reallyName = new MutableLiveData<>();
+//    public MutableLiveData<String> getUsersChange = new MutableLiveData<String>();
+    //    public LiveData<Status<List<Users>>> statusMutableLiveData
+//            = Transformations.switchMap(
+//            getUsersChange, new Function<String, LiveData<Status<List<Users>>>>() {
+//                @Override
+//                public LiveData<Status<List<Users>>> apply(String input) {
+//                    Log.e("setDataList", "getUsers: 1111111");
+//                    return repository.getUsers();
+//                }
+//            }
+//    );
+//    public void sayHello(String name) {
+////        _name.postValue(name);
+//        repository.setTextStr(name);
+//        reallyName.setValue(repository.getTextStr().getValue());
+//    }
+//
+//
+//    public void getUsers(String name) {
+//        Log.e("setDataList", "getUsers: 0000000");
+//        getUsersChange.setValue(name);
+//
+//
+//    }
+//
+//
+//    public void saveUsers(LiveData<Status<List<Users>>> data) {
+//        if (data.getValue() != null) {
+//            repository.saveUsers(Objects.requireNonNull(data.getValue()).data);
+//
+//        }
+//    }
 }

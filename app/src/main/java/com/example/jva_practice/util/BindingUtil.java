@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.jva_practice.MainAdapter;
 import com.example.jva_practice.MainViewModel;
@@ -32,7 +33,11 @@ public class BindingUtil {
 //        isRefreshing = visible
 //    }
 //
-
+    @BindingAdapter("refreshing")
+    public static void refreshing(SwipeRefreshLayout view,
+                                  Boolean visible) {
+        view.setRefreshing(visible);
+    }
 
     @BindingAdapter({"bookmarks", "viewModel"})
     public static void setBookmarks(RecyclerView view, Status<List<Users>> status, MainViewModel viewModel) {

@@ -14,29 +14,32 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao
-interface MainDbDao {
+public interface UserDbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public Completable insertUsers(MainTable... users);
+    public Completable insertAll(List<UserTable> users);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public Completable insertAllPrivateData(List<MainTable> friends);
+    public Completable insertAllPrivateData(List<UserTable> friends);
 
     @Update
-    public Completable updateUsers(MainTable... users);
+    public Completable deleteAll(List<UserTable> userTables);
+
+    @Query("DELETE FROM UserTable")
+    public void deleteAll();
 
     @Delete
-    Completable deletePrivateDatas(List<MainTable> photoEntityList);
+    Completable deletePrivateDatas(List<UserTable> photoEntityList);
 
     @Delete
-    public Completable deleteUsers(MainTable... users);
+    public Completable deleteUsers(UserTable... users);
 
-    @Query("SELECT * FROM MainTable")
-    Single<List<MainTable>> loadAllPrivateData();
+    @Query("SELECT * FROM UserTable")
+    Single<List<UserTable>> getAll();
 
-    @Query("DELETE FROM MainTable WHERE id = :id")
+    @Query("DELETE FROM UserTable WHERE id = :id")
     public Completable deleteAlertByUserId(String id);
-    @Query("SELECT * FROM MainTable WHERE id = :qbeeId " )
-    Single<List<MainTable>> loadAllSharedDataByQbeeID(int qbeeId);
+    @Query("SELECT * FROM UserTable WHERE id = :qbeeId " )
+    Single<List<UserTable>> loadAllSharedDataByQbeeID(int qbeeId);
 //    @Query("SELECT * FROM PRIVATE_ENTITY")
 //    Single<List<PhotoEntity>> loadAllPrivateData();
 //    @Query("SELECT * FROM PRIVATE_ENTITY WHERE folder_content =(:folder_content) AND " + "item_id = (:item_id) LIMIT 1")
