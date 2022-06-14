@@ -65,7 +65,7 @@ public class UserDbData implements DataSource<UserTable> {
 
     @Override
     public Completable removeAll(List<UserTable> list) {
-        return userDbDao.deleteAll(list);
+        return userDbDao.deleteAll();
     }
 
 

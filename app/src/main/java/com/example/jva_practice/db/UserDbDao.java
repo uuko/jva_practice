@@ -25,7 +25,7 @@ public interface UserDbDao {
     public Completable deleteAll(List<UserTable> userTables);
 
     @Query("DELETE FROM UserTable")
-    public void deleteAll();
+    Completable  deleteAll();
 
     @Delete
     Completable deletePrivateDatas(List<UserTable> photoEntityList);
