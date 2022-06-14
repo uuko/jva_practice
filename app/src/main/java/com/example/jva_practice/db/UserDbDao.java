@@ -21,7 +21,7 @@ public interface UserDbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertAllPrivateData(List<UserTable> friends);
 
-    @Update
+    @Delete
     public Completable deleteAll(List<UserTable> userTables);
 
     @Query("DELETE FROM UserTable")
