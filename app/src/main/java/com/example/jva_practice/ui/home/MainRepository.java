@@ -1,4 +1,4 @@
-package com.example.jva_practice;
+package com.example.jva_practice.ui.home;
 
 import android.util.Log;
 

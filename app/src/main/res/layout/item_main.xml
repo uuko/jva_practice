@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.jva_practice.MainViewModel" />
+            type="com.example.jva_practice.ui.home.MainViewModel" />
 
         <variable
             name="user"

@@ -1,4 +1,4 @@
-package com.example.jva_practice;
+package com.example.jva_practice.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

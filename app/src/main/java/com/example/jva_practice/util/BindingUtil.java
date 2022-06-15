@@ -1,14 +1,13 @@
 package com.example.jva_practice.util;
 
-import android.util.Size;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.jva_practice.MainAdapter;
-import com.example.jva_practice.MainViewModel;
+import com.example.jva_practice.ui.home.MainAdapter;
+import com.example.jva_practice.ui.home.MainViewModel;
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
 

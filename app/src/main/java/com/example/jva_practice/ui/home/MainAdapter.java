@@ -1,4 +1,4 @@
-package com.example.jva_practice;
+package com.example.jva_practice.ui.home;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jva_practice.R;
 import com.example.jva_practice.data.Users;
 import com.example.jva_practice.databinding.ItemMainBinding;
 import com.example.jva_practice.util.BindingViewHolder;

@@ -1,4 +1,4 @@
-package com.example.jva_practice;
+package com.example.jva_practice.ui.home;
 
 import android.util.Log;
 
@@ -12,7 +12,6 @@ import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MainViewModel extends ViewModel {
     private MainRepository repository;
