@@ -69,4 +69,10 @@ public class PostViewModel extends ViewModel {
         userIdLiveData.setValue(userId);
         ;
     }
+
+    @Override
+    protected void onCleared() {
+        repository.disComposite();
+        super.onCleared();
+    }
 }

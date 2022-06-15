@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -25,7 +26,10 @@ public class PostRepository {
         return mutablePostLiveData;
     }
 
-
+    private CompositeDisposable disposable=new CompositeDisposable();
+    public void disComposite(){
+        disposable.dispose();
+    }
     public MutableLiveData<Status<List<PostTable>>> getPostsByUserId(String userId) {
         Repository.of(PostTable.class).query()
                 .where(Util.USER_ID, userId)
@@ -35,7 +39,7 @@ public class PostRepository {
                 .subscribe(new Observer<List<PostTable>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        disposable.add(d);
                     }
 
                     @Override
