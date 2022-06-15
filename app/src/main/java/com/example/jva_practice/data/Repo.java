@@ -104,7 +104,7 @@ public class Repo<Entity> implements DataSource<Entity> {
                     .flatMap(new Function<Entity, ObservableSource<? extends Entity>>() {
                         @Override
                         public ObservableSource<? extends Entity> apply(Entity entity) throws Exception {
-                            return db.save(entity);
+                            return db.save((Entity) DBUtils.entityToTable(entity));
                         }
                     });
 

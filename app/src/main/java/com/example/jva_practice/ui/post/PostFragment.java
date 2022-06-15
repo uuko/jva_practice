@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.jva_practice.R;
 import com.example.jva_practice.base.BaseFragment;
+import com.example.jva_practice.data.navigation.NavigationDestination;
 import com.example.jva_practice.databinding.FragmentPostBinding;
 
 
@@ -60,10 +63,24 @@ public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewMode
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mViewBinding.setLifecycleOwner(this);
         mViewBinding.setViewModel(mViewModel);
-        int queryData=getArguments().getInt("mUserId");
+        int queryData = getArguments().getInt("mUserId");
         mViewModel.setQueryData(String.valueOf(queryData));
 
-        Log.e("onViewCreated", "onViewCreated: "+ getArguments().getInt("mUserId") );
+        Log.e("onViewCreated", "onViewCreated: " + getArguments().getInt("mUserId"));
+
+        mViewModel.destination.observe(getViewLifecycleOwner(), new Observer<NavigationDestination>() {
+            @Override
+            public void onChanged(NavigationDestination navigationDestination) {
+                if (navigationDestination != null) {
+                    if (navigationDestination.equals(NavigationDestination.NAVIGATION_DESTINATION_ADD_POSTING)) {
+                        Navigation.findNavController(mViewBinding.getRoot()).navigate(R.id.action_postFragment_to_addFragment);
+                    }
+                }
+
+            }
+        });
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 }

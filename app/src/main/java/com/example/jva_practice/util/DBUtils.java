@@ -54,6 +54,7 @@ public class DBUtils {
                 );
         return mainTable;
     }
+
     public static List<PostTable> toPostsTableList(List<Posts> usersList) {
         List<PostTable> tableList = new ArrayList<>();
         for (Posts users : usersList) {
@@ -61,6 +62,7 @@ public class DBUtils {
         }
         return tableList;
     }
+
     public static List<UserTable> toUserTableList(List<Users> usersList) {
         List<UserTable> tableList = new ArrayList<>();
         for (Users users : usersList) {
@@ -77,18 +79,31 @@ public class DBUtils {
         return tableList;
     }
 
+    public static Object entityToTable(Object users) {
+        Object tableList = null;
+        if (users instanceof Users)
+            tableList = (toMainTable((Users) users));
+        else if (users instanceof Posts) {
+            tableList = (toPostTable((Posts) users));
+        } else if (users instanceof PostTable) {
+            tableList = ((PostTable) users);
+        } else if (users instanceof UserTable) {
+            tableList = ((UserTable) users);
+        }
+
+        return tableList;
+    }
+
     public static List<?> entityToList(List<?> usersList) {
         List<Object> tableList = new ArrayList<>();
         for (Object users : usersList) {
             if (users instanceof Users)
                 tableList.add(toMainTable((Users) users));
-            else if (users instanceof Posts){
+            else if (users instanceof Posts) {
                 tableList.add(toPostTable((Posts) users));
-            }
-            else if (users instanceof PostTable){
+            } else if (users instanceof PostTable) {
                 tableList.add((PostTable) users);
-            }
-            else if (users instanceof UserTable){
+            } else if (users instanceof UserTable) {
                 tableList.add((UserTable) users);
             }
 

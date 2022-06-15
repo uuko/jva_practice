@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.jva_practice.data.Repository;
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
+import com.example.jva_practice.data.navigation.NavigationDestination;
 import com.example.jva_practice.db.UserTable;
 import com.example.jva_practice.db.post.PostTable;
 import com.example.jva_practice.util.DBUtils;
@@ -48,7 +49,17 @@ public class PostViewModel extends ViewModel {
             }
     );
 
+    private MutableLiveData<NavigationDestination> _destination = new MutableLiveData<NavigationDestination>(null);
+    LiveData<NavigationDestination> destination = _destination;
 
+    public void setDestinationToNull() {
+        _destination.setValue(null);
+    }
+
+
+    public void start() {
+        _destination.setValue(NavigationDestination.NAVIGATION_DESTINATION_ADD_POSTING);
+    }
     public void getPostUserId() {
 //        Log.e("onNext", "postTest: userId===> "+userId);
         userIdLiveData.setValue(userIdLiveData.getValue());
