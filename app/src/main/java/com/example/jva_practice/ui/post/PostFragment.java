@@ -2,20 +2,21 @@ package com.example.jva_practice.ui.post;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jva_practice.R;
+import com.example.jva_practice.base.BaseFragment;
+import com.example.jva_practice.databinding.FragmentPostBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PostFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PostFragment extends Fragment {
+
+public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewModel, PostViewModelFactory> {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,23 +31,6 @@ public class PostFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PostFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PostFragment newInstance(String param1, String param2) {
-        PostFragment fragment = new PostFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +42,28 @@ public class PostFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false);
+    public Integer getLayoutId() {
+        return R.layout.fragment_post;
+    }
+
+    @Override
+    public Class<PostViewModel> getViewModel() {
+        return PostViewModel.class;
+    }
+
+    @Override
+    public PostViewModelFactory getViewModelFactory() {
+        return new PostViewModelFactory(new PostRepository());
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mViewBinding.setLifecycleOwner(this);
+        mViewBinding.setViewModel(mViewModel);
+        int queryData=getArguments().getInt("mUserId");
+        mViewModel.setQueryData(String.valueOf(queryData));
+
+        Log.e("onViewCreated", "onViewCreated: "+ getArguments().getInt("mUserId") );
+        super.onViewCreated(view, savedInstanceState);
     }
 }

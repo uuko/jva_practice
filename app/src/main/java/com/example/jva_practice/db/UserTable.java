@@ -15,7 +15,18 @@ public class UserTable implements Serializable {
     private String phone;
     private String website;
 
-    public UserTable(String name, String username, String email, String phone, String website) {
+    public int getPkId() {
+        return pkId;
+    }
+
+    public void setPkId(int pkId) {
+        this.pkId = pkId;
+    }
+
+    private int pkId=0;
+
+    public UserTable(Integer pkId,String name, String username, String email, String phone, String website) {
+        this.pkId=pkId;
         this.name = name;
         this.username = username;
         this.email = email;

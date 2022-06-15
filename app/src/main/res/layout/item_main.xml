@@ -14,6 +14,7 @@
     </data>
 
     <LinearLayout
+        android:onClick="@{()->viewModel.start(user.id)}"
         android:background="@drawable/shape_main"
         android:orientation="vertical"
         android:layout_width="match_parent"

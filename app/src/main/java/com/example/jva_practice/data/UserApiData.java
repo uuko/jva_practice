@@ -33,5 +33,15 @@ public class UserApiData implements DataSource<Users> {
         return null;
     }
 
+    @Override
+    public Observable<Users> save(Users data) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<Users>> getAll(Query<Users> query) {
+        return null;
+    }
+
 
 }

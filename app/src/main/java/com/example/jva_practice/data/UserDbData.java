@@ -68,5 +68,15 @@ public class UserDbData implements DataSource<UserTable> {
         return userDbDao.deleteAll();
     }
 
+    @Override
+    public Observable<UserTable> save(UserTable data) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<UserTable>> getAll(Query<UserTable> query) {
+        return null;
+    }
+
 
 }

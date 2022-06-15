@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
+import com.example.jva_practice.data.navigation.NavigationDestination;
 
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class MainViewModel extends ViewModel {
             = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> mLoading
             = _mLoading;
+    private final MutableLiveData<Integer> _mUserId=new MutableLiveData<>();
+    public MutableLiveData<Integer> mUserId=_mUserId;
 
     public void getAllUsers() {
         getUsersChangeRepo.setValue("");
@@ -44,6 +47,21 @@ public class MainViewModel extends ViewModel {
         _mLoading.setValue(repository.getLoading().getValue());
     }
 
+
+    private MutableLiveData<NavigationDestination> _destination = new MutableLiveData<NavigationDestination>(null);
+    LiveData<NavigationDestination> destination = _destination;
+
+    public void setDestinationToNull() {
+        _destination.setValue(null);
+    }
+
+
+    public void start(int userId) {
+        Log.e("onViewCreated", "start: "+userId );
+        _mUserId.setValue(userId);
+        _destination.setValue(NavigationDestination.NAVIGATION_DESTINATION_POST);
+
+    }
 
     @Override
     protected void onCleared() {

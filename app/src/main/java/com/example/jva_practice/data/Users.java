@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 
 public class Users implements Serializable {
-    public Users(String name, String username, String email, String phone, String website) {
+    public Users(Integer id,String name, String username, String email, String phone, String website) {
+        this.id=id;
         this.name = name;
         this.username = username;
         this.email = email;

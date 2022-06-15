@@ -1,15 +1,20 @@
 package com.example.jva_practice.util;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.jva_practice.data.posts.Posts;
+import com.example.jva_practice.db.post.PostTable;
 import com.example.jva_practice.ui.home.MainAdapter;
 import com.example.jva_practice.ui.home.MainViewModel;
 import com.example.jva_practice.data.Status;
 import com.example.jva_practice.data.Users;
+import com.example.jva_practice.ui.post.PostAdapter;
+import com.example.jva_practice.ui.post.PostViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,19 +61,23 @@ public class BindingUtil {
         );
         adapter.setDataList(items);
     }
-//    fun setBookmarks(view: RecyclerView, datas: List<Users>, vm: HomeViewModel) {
-////    val llm = LinearLayoutManager(this)
-////    llm.orientation = LinearLayoutManager.VERTICAL
-//        val items = datas?: arrayListOf()
-//        view.adapter?.run {
-//            Log.e("setBookmarks", "setBookmarks: aaaaaaaaa")
-//            if (this is HomeAdapter) this.submitList(items)
-//        } ?: run {
-//            Log.e("setBookmarks", "setBookmarks: bbbbbbbbbb")
-//            HomeAdapter(vm).apply {
-//                view.adapter = this
-//                this.submitList(items)
-//            }
-//        }
-//    }
+    @BindingAdapter({"posts", "viewModel"})
+    public static void setPosts(RecyclerView view, Status<List<PostTable>> status, PostViewModel viewModel) {
+
+        List<PostTable> items = new ArrayList<>();
+        if (status != null) {
+            if (status.status == Status.StatusType.SUCCESS) {
+                for (Object u : status.data) {
+                    items.add((PostTable) u);
+                }
+            }
+        }
+
+        Log.e("postTest", "setPosts: "+items.size() );
+        PostAdapter adapter = new PostAdapter( viewModel);
+        view.setAdapter(
+                adapter
+        );
+        adapter.submitList(items);
+    }
 }
