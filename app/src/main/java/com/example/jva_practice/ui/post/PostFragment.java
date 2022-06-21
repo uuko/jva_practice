@@ -63,10 +63,17 @@ public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewMode
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mViewBinding.setLifecycleOwner(this);
         mViewBinding.setViewModel(mViewModel);
-        int queryData = getArguments().getInt("mUserId");
+        int queryData=0;
+        try {
+             queryData = getArguments().getInt("mUserId");
+            Log.e("onViewCreated", "onViewCreated: " + getArguments().getInt("mUserId"));
+
+        }
+        catch (Exception e){
+
+        }
         mViewModel.setQueryData(String.valueOf(queryData));
 
-        Log.e("onViewCreated", "onViewCreated: " + getArguments().getInt("mUserId"));
 
         mViewModel.destination.observe(getViewLifecycleOwner(), new Observer<NavigationDestination>() {
             @Override
