@@ -1,6 +1,7 @@
 package com.example.jva_practice.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -40,11 +41,13 @@ public class MainFragment extends BaseFragment<FragmentMainBinding, MainViewMode
         mViewModel.destination.observe(getViewLifecycleOwner(), new Observer<NavigationDestination>() {
             @Override
             public void onChanged(NavigationDestination navigationDestination) {
+                Log.e("MainFragment", "mViewModel.destination onChanged: "+navigationDestination );
                 if (navigationDestination != null) {
                     if (navigationDestination.equals(NavigationDestination.NAVIGATION_DESTINATION_POST)) {
                         Bundle bundle = new Bundle();
                         bundle.putInt("mUserId", mViewModel.mUserId.getValue());
                         Navigation.findNavController(mViewBinding.getRoot()).navigate(R.id.action_mainFragment_to_postFragment, bundle);
+                        mViewModel.navigationComplete();
                     }
                 }
 

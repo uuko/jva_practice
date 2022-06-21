@@ -38,8 +38,8 @@ public class MainViewModel extends ViewModel {
             = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> mLoading
             = _mLoading;
-    private final MutableLiveData<Integer> _mUserId=new MutableLiveData<>();
-    public MutableLiveData<Integer> mUserId=_mUserId;
+    private final MutableLiveData<Integer> _mUserId = new MutableLiveData<>();
+    public MutableLiveData<Integer> mUserId = _mUserId;
 
     public void getAllUsers() {
         getUsersChangeRepo.setValue("");
@@ -55,9 +55,12 @@ public class MainViewModel extends ViewModel {
         _destination.setValue(null);
     }
 
+    public void navigationComplete() {
+        _destination.setValue(NavigationDestination.NAVIGATION_INIT);
+    }
 
     public void start(int userId) {
-        Log.e("onViewCreated", "start: "+userId );
+        Log.e("onViewCreated", "start: " + userId);
         _mUserId.setValue(userId);
         _destination.setValue(NavigationDestination.NAVIGATION_DESTINATION_POST);
 

@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainActViewM
         NavigationView navigationView=
                 mViewBinding.navView;
         NavController navController=Navigation.findNavController(this, R.id.my_nav_host_fragment);
+
         AppBarConfiguration appBarConfiguration=
                 new AppBarConfiguration.Builder(
                     navController.getGraph()
@@ -53,7 +54,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainActViewM
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
 
+      return   Navigation.findNavController(this, R.id.my_nav_host_fragment).navigateUp() ||
+                    super.onSupportNavigateUp();
+
+    }
 
 
     //    private void handleAction(@NonNull final Action action) {

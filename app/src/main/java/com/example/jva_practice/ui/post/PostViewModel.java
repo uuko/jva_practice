@@ -56,7 +56,9 @@ public class PostViewModel extends ViewModel {
         _destination.setValue(null);
     }
 
-
+    public void navigationComplete() {
+        _destination.setValue(NavigationDestination.NAVIGATION_INIT);
+    }
     public void start() {
         _destination.setValue(NavigationDestination.NAVIGATION_DESTINATION_ADD_POSTING);
     }

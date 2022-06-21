@@ -81,6 +81,7 @@ public class PostFragment extends BaseFragment<FragmentPostBinding, PostViewMode
                 if (navigationDestination != null) {
                     if (navigationDestination.equals(NavigationDestination.NAVIGATION_DESTINATION_ADD_POSTING)) {
                         Navigation.findNavController(mViewBinding.getRoot()).navigate(R.id.action_postFragment_to_addFragment);
+                        mViewModel.navigationComplete();
                     }
                 }
 
